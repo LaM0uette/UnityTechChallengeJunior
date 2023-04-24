@@ -25,14 +25,14 @@ namespace Tests.Editor
             var furniture = JsonParser.Parse<Furniture>(TestJson);
 
             Assert.IsNotNull(furniture);
-            Assert.AreEqual(3000, furniture.width);
-            Assert.AreEqual(400, furniture.height);
-            Assert.AreEqual(600, furniture.depth);
-            Assert.AreEqual(5, furniture.backPanel.depth);
-            Assert.AreEqual(50, furniture.header.height);
-            Assert.AreEqual(100, furniture.footer.height);
-            Assert.AreEqual(80, furniture.leftSide.width);
-            Assert.AreEqual(80, furniture.rightSide.width);
+            Assert.AreEqual(3000, furniture.Width);
+            Assert.AreEqual(400, furniture.Height);
+            Assert.AreEqual(600, furniture.Depth);
+            Assert.AreEqual(5, furniture.BackPanel.depth);
+            Assert.AreEqual(50, furniture.Header.height);
+            Assert.AreEqual(100, furniture.Footer.height);
+            Assert.AreEqual(80, furniture.LeftSide.width);
+            Assert.AreEqual(80, furniture.RightSide.width);
         }
 
         [Test]
@@ -42,14 +42,14 @@ namespace Tests.Editor
             var furniture = JsonParser.ReadAndParse<Furniture>(testFilePath);
 
             Assert.IsNotNull(furniture);
-            Assert.AreEqual(3000, furniture.width);
-            Assert.AreEqual(400, furniture.height);
-            Assert.AreEqual(600, furniture.depth);
-            Assert.AreEqual(5, furniture.backPanel.depth);
-            Assert.AreEqual(50, furniture.header.height);
-            Assert.AreEqual(100, furniture.footer.height);
-            Assert.AreEqual(80, furniture.leftSide.width);
-            Assert.AreEqual(80, furniture.rightSide.width);
+            Assert.AreEqual(3000, furniture.Width);
+            Assert.AreEqual(400, furniture.Height);
+            Assert.AreEqual(600, furniture.Depth);
+            Assert.AreEqual(5, furniture.BackPanel.depth);
+            Assert.AreEqual(50, furniture.Header.height);
+            Assert.AreEqual(100, furniture.Footer.height);
+            Assert.AreEqual(80, furniture.LeftSide.width);
+            Assert.AreEqual(80, furniture.RightSide.width);
         }
         
         [Test]
@@ -59,15 +59,15 @@ namespace Tests.Editor
             var furniture = JsonParser.ReadAndParse<Furniture>(testFilePath);
 
             Assert.IsNotNull(furniture);
-            Assert.AreEqual(800, furniture.width);
-            Assert.AreEqual(2000, furniture.height);
-            Assert.AreEqual(200, furniture.depth);
-            Assert.AreEqual(5, furniture.backPanel.depth);
-            Assert.AreEqual(100, furniture.header.height);
-            Assert.AreEqual(400, furniture.footer.height);
-            Assert.AreEqual(50, furniture.leftSide.width);
-            Assert.AreEqual(50, furniture.rightSide.width);
-            Assert.AreEqual(3, furniture.shelves.Length);
+            Assert.AreEqual(800, furniture.Width);
+            Assert.AreEqual(2000, furniture.Height);
+            Assert.AreEqual(200, furniture.Depth);
+            Assert.AreEqual(5, furniture.BackPanel.depth);
+            Assert.AreEqual(100, furniture.Header.height);
+            Assert.AreEqual(400, furniture.Footer.height);
+            Assert.AreEqual(50, furniture.LeftSide.width);
+            Assert.AreEqual(50, furniture.RightSide.width);
+            Assert.AreEqual(3, furniture.Shelves.Length);
         }
     }
 }
