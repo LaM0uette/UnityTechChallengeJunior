@@ -8,12 +8,15 @@
   "leftSide": { "width": 25 },
   "rightSide": { "width": 25 },
   "shelves": [
-    { "height": 20, "y": 600 },
+    { "height": 20, "y": 350 },
+    { "height": 20, "y": 350 },
+    { "height": 20, "y": 500 },
     { "height": 20, "y": 650 },
-    { "height": 20, "y": 700 },
-    { "height": 20, "y": 750 },
     { "height": 20, "y": 800 },
-    { "height": 20, "y": 850 },
-    { "height": 20, "y": 900 }
+    { "height": 20, "y": 950 },
+    { "height": 20, "y": 1100 },
+    { "height": 20, "y": 1250 },
+    { "height": 20, "y": 1400 },
+    { "height": 20, "y": 1550 }
   ]
 }
