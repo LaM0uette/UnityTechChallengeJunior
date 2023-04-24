@@ -63,6 +63,7 @@ namespace Builders
                 var shelf = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 shelf.name = "Shelf";
                 shelf.transform.localScale = new Vector3(_furniture.width, shelfData.height, _furniture.depth);
+                shelf.transform.position = new Vector3(0, shelfData.y, 0);
                 shelves.Add(shelf);
             }
 
