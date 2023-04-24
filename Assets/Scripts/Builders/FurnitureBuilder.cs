@@ -1,71 +1,93 @@
+using System.Collections.Generic;
 using Data;
+using UnityEngine;
 
 namespace Builders
 {
-    public class FurnitureBuilder : IFurnitureBuilder
+    public class FurnitureBuilder : MonoBehaviour, IFurnitureBuilder
     {
         private Furniture _furniture;
 
-        public FurnitureBuilder()
+        public IFurnitureBuilder SetData(Furniture furnitureData)
         {
-            Reset();
+            _furniture = furnitureData;
+            return this;
         }
 
-        public void Reset()
+        private GameObject CreateBackPanel(BackPanel backPanelData)
         {
-            _furniture = new Furniture();
+            var backPanel = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            backPanel.name = "BackPanel";
+            backPanel.transform.localScale = new Vector3(_furniture.width, _furniture.height, backPanelData.depth);
+            return backPanel;
         }
 
-        public void SetWidth(float width)
+        private GameObject CreateHeader(Header headerData)
         {
-            _furniture.width = width;
+            var header = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            header.name = "Header";
+            header.transform.localScale = new Vector3(_furniture.width, headerData.height, _furniture.depth);
+            return header;
         }
 
-        public void SetHeight(float height)
+        private GameObject CreateFooter(Footer footerData)
         {
-            _furniture.height = height;
+            var footer = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            footer.name = "Footer";
+            footer.transform.localScale = new Vector3(_furniture.width, footerData.height, _furniture.depth);
+            return footer;
         }
 
-        public void SetDepth(float depth)
+        private GameObject CreateLeftSide(LeftSide leftSideData)
         {
-            _furniture.depth = depth;
+            var leftSide = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            leftSide.name = "LeftSide";
+            leftSide.transform.localScale = new Vector3(leftSideData.width, _furniture.height, _furniture.depth);
+            return leftSide;
         }
 
-        public void SetBackPanel(BackPanel backPanel)
+        private GameObject CreateRightSide(RightSide rightSideData)
         {
-            _furniture.backPanel = backPanel;
+            var rightSide = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            rightSide.name = "RightSide";
+            rightSide.transform.localScale = new Vector3(rightSideData.width, _furniture.height, _furniture.depth);
+            return rightSide;
         }
 
-        public void SetHeader(Header header)
+        private List<GameObject> CreateShelves(IEnumerable<Shelf> shelvesData)
         {
-            _furniture.header = header;
+            var shelves = new List<GameObject>();
+
+            foreach (var shelfData in shelvesData)
+            {
+                var shelf = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                shelf.name = "Shelf";
+                shelf.transform.localScale = new Vector3(_furniture.width, shelfData.height, _furniture.depth);
+                shelves.Add(shelf);
+            }
+
+            return shelves;
         }
 
-        public void SetFooter(Footer footer)
+        public GameObject Build()
         {
-            _furniture.footer = footer;
-        }
+            var backPanel = CreateBackPanel(_furniture.backPanel);
+            var header = CreateHeader(_furniture.header);
+            var footer = CreateFooter(_furniture.footer);
+            var leftSide = CreateLeftSide(_furniture.leftSide);
+            var rightSide = CreateRightSide(_furniture.rightSide);
+            var shelves = CreateShelves(_furniture.shelves);
 
-        public void SetLeftSide(LeftSide leftSide)
-        {
-            _furniture.leftSide = leftSide;
-        }
+            var furniture = new GameObject("Furniture");
+            backPanel.transform.SetParent(furniture.transform);
+            header.transform.SetParent(furniture.transform);
+            footer.transform.SetParent(furniture.transform);
+            leftSide.transform.SetParent(furniture.transform);
+            rightSide.transform.SetParent(furniture.transform);
+            foreach (var shelf in shelves)
+                shelf.transform.SetParent(furniture.transform);
 
-        public void SetRightSide(RightSide rightSide)
-        {
-            _furniture.rightSide = rightSide;
-        }
-
-        public void AddShelf(Shelf shelf)
-        {
-            _furniture.shelves.Add(shelf);
-        }
-
-        public Furniture Build()
-        {
-            var builtFurniture = _furniture;
-            Reset();
-            return builtFurniture;
+            return furniture;
         }
     }
 }
