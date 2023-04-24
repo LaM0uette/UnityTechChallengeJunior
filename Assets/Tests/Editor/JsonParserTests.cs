@@ -6,7 +6,7 @@ using Utils;
 
 namespace Tests.Editor
 {
-    public class JsonParserTests : MonoBehaviour
+    public class JsonParserTests
     {
         private const string TestJson = @"
 {
@@ -21,7 +21,7 @@ namespace Tests.Editor
 }";
 
         [Test]
-        public void ParseFurnitureFromJsonString()
+        public void Parse_furniture1_True()
         {
             var furniture = JsonParser.Parse<Furniture>(TestJson);
 
@@ -37,12 +37,10 @@ namespace Tests.Editor
         }
 
         [Test]
-        public void LoadAndParseFurnitureFromJsonFile()
+        public void ReadAndParse_furniture1_True()
         {
             var testFilePath = Application.dataPath + "/FixturesJson/furniture1.json";
-            File.WriteAllText(testFilePath, TestJson);
-
-            var furniture = JsonParser.LoadAndParse<Furniture>(testFilePath);
+            var furniture = JsonParser.ReadAndParse<Furniture>(testFilePath);
 
             Assert.IsNotNull(furniture);
             Assert.AreEqual(3000, furniture.width);
@@ -53,8 +51,6 @@ namespace Tests.Editor
             Assert.AreEqual(100, furniture.footer.height);
             Assert.AreEqual(80, furniture.leftSide.width);
             Assert.AreEqual(80, furniture.rightSide.width);
-
-            File.Delete(testFilePath);
         }
     }
 }

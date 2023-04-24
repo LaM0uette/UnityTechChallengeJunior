@@ -10,7 +10,7 @@ namespace Utils
             return JsonUtility.FromJson<T>(jsonString);
         }
 
-        public static T LoadAndParse<T>(string filePath)
+        public static T ReadAndParse<T>(string filePath)
         {
             var jsonString = File.ReadAllText(filePath);
             return Parse<T>(jsonString);
