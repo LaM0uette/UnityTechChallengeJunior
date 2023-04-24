@@ -5,14 +5,14 @@ namespace Data
     [System.Serializable]
     public class Furniture
     {
-        public float Width;
-        public float Height;
-        public float Depth;
-        public BackPanel BackPanel;
-        public Header Header;
-        public Footer Footer;
-        public LeftSide LeftSide;
-        public RightSide RightSide;
-        public List<Shelf> Shelves;
+        public float width;
+        public float height;
+        public float depth;
+        public BackPanel backPanel;
+        public Header header;
+        public Footer footer;
+        public LeftSide leftSide;
+        public RightSide rightSide;
+        public List<Shelf> shelves;
     }
 }

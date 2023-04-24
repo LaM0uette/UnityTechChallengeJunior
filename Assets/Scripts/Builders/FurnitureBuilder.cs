@@ -18,47 +18,47 @@ namespace Builders
 
         public void SetWidth(float width)
         {
-            _furniture.Width = width;
+            _furniture.width = width;
         }
 
         public void SetHeight(float height)
         {
-            _furniture.Height = height;
+            _furniture.height = height;
         }
 
         public void SetDepth(float depth)
         {
-            _furniture.Depth = depth;
+            _furniture.depth = depth;
         }
 
         public void SetBackPanel(BackPanel backPanel)
         {
-            _furniture.BackPanel = backPanel;
+            _furniture.backPanel = backPanel;
         }
 
         public void SetHeader(Header header)
         {
-            _furniture.Header = header;
+            _furniture.header = header;
         }
 
         public void SetFooter(Footer footer)
         {
-            _furniture.Footer = footer;
+            _furniture.footer = footer;
         }
 
         public void SetLeftSide(LeftSide leftSide)
         {
-            _furniture.LeftSide = leftSide;
+            _furniture.leftSide = leftSide;
         }
 
         public void SetRightSide(RightSide rightSide)
         {
-            _furniture.RightSide = rightSide;
+            _furniture.rightSide = rightSide;
         }
 
         public void AddShelf(Shelf shelf)
         {
-            _furniture.Shelves.Add(shelf);
+            _furniture.shelves.Add(shelf);
         }
 
         public Furniture Build()
