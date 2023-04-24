@@ -19,6 +19,7 @@ namespace Builders
             var backPanel = GameObject.CreatePrimitive(PrimitiveType.Cube);
             backPanel.name = "BackPanel";
             backPanel.transform.localScale = new Vector3(_furniture.width, _furniture.height, backPanelData.depth);
+            backPanel.transform.position = new Vector3(0, _furniture.height / 2, 0);
             return backPanel;
         }
 
@@ -27,6 +28,7 @@ namespace Builders
             var header = GameObject.CreatePrimitive(PrimitiveType.Cube);
             header.name = "Header";
             header.transform.localScale = new Vector3(_furniture.width, headerData.height, _furniture.depth);
+            header.transform.position = new Vector3(0, _furniture.height - headerData.height / 2, -_furniture.depth / 2);
             return header;
         }
 
@@ -35,6 +37,7 @@ namespace Builders
             var footer = GameObject.CreatePrimitive(PrimitiveType.Cube);
             footer.name = "Footer";
             footer.transform.localScale = new Vector3(_furniture.width, footerData.height, _furniture.depth);
+            footer.transform.position = new Vector3(0, footerData.height / 2, -_furniture.depth / 2);
             return footer;
         }
 
@@ -43,6 +46,7 @@ namespace Builders
             var leftSide = GameObject.CreatePrimitive(PrimitiveType.Cube);
             leftSide.name = "LeftSide";
             leftSide.transform.localScale = new Vector3(leftSideData.width, _furniture.height, _furniture.depth);
+            leftSide.transform.position = new Vector3(-_furniture.width / 2 + leftSideData.width / 2, _furniture.height / 2, -_furniture.depth / 2);
             return leftSide;
         }
 
@@ -51,6 +55,7 @@ namespace Builders
             var rightSide = GameObject.CreatePrimitive(PrimitiveType.Cube);
             rightSide.name = "RightSide";
             rightSide.transform.localScale = new Vector3(rightSideData.width, _furniture.height, _furniture.depth);
+            rightSide.transform.position = new Vector3(_furniture.width / 2 - rightSideData.width / 2, _furniture.height / 2, -_furniture.depth / 2);
             return rightSide;
         }
 
@@ -85,6 +90,7 @@ namespace Builders
             footer.transform.SetParent(furniture.transform);
             leftSide.transform.SetParent(furniture.transform);
             rightSide.transform.SetParent(furniture.transform);
+            
             foreach (var shelf in shelves)
                 shelf.transform.SetParent(furniture.transform);
 
