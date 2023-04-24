@@ -28,6 +28,7 @@
 .gradle/
 
 # Packages
+/Packages/
 [Aa]ssets/Packages/
 [Aa]ssets/Polaris*/
 [Aa]ssets/Plugin*/
