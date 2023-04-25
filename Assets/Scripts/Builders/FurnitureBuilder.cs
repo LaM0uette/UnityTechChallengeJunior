@@ -13,66 +13,71 @@ namespace Builders
 
         #endregion
 
-        #region Functions
-
+        #region Builder
+        
         public IFurnitureBuilder SetData(Furniture furniture)
         {
             _furniture = furniture;
             return this;
         }
-        
-        private static GameObject CreateCube() => GameObject.CreatePrimitive(PrimitiveType.Cube);
-        
-        private static void SetTagForChildren(GameObject parent, string tagName)
-        {
-            foreach (Transform child in parent.transform)
-            {
-                child.gameObject.tag = tagName;
-            }
-        }
 
         private GameObject CreateBackPanel(BackPanel backPanelData)
         {
-            var backPanel = CreateCube();
+            var backPanel = FurnitureFunctions.CreateCube();
+            var position = new Vector3(0, _furniture.height / 2, 0);
+            var scale = new Vector3(_furniture.width, _furniture.height, backPanelData.depth);
+            
             backPanel.name = "BackPanel";
-            backPanel.transform.localScale = new Vector3(_furniture.width, _furniture.height, backPanelData.depth);
-            backPanel.transform.position = new Vector3(0, _furniture.height / 2, 0);
+            backPanel.SetTansform(position, scale);
+            
             return backPanel;
         }
 
         private GameObject CreateHeader(Header headerData)
         {
-            var header = CreateCube();
+            var header = FurnitureFunctions.CreateCube();
+            var position = new Vector3(0, _furniture.height - headerData.height / 2, -_furniture.depth / 2);
+            var scale = new Vector3(_furniture.width, headerData.height, _furniture.depth);
+            
             header.name = "Header";
-            header.transform.localScale = new Vector3(_furniture.width, headerData.height, _furniture.depth);
-            header.transform.position = new Vector3(0, _furniture.height - headerData.height / 2, -_furniture.depth / 2);
+            header.SetTansform(position, scale);
+            
             return header;
         }
 
         private GameObject CreateFooter(Footer footerData)
         {
-            var footer = CreateCube();
+            var footer = FurnitureFunctions.CreateCube();
+            var position = new Vector3(0, footerData.height / 2, -_furniture.depth / 2);
+            var scale = new Vector3(_furniture.width, footerData.height, _furniture.depth);
+            
             footer.name = "Footer";
-            footer.transform.localScale = new Vector3(_furniture.width, footerData.height, _furniture.depth);
-            footer.transform.position = new Vector3(0, footerData.height / 2, -_furniture.depth / 2);
+            footer.SetTansform(position, scale);
+            
             return footer;
         }
 
         private GameObject CreateLeftSide(LeftSide leftSideData)
         {
-            var leftSide = CreateCube();
+            var leftSide = FurnitureFunctions.CreateCube();
+            var position = new Vector3(-_furniture.width / 2 + leftSideData.width / 2, _furniture.height / 2, -_furniture.depth / 2);
+            var scale = new Vector3(leftSideData.width, _furniture.height, _furniture.depth);
+            
             leftSide.name = "LeftSide";
-            leftSide.transform.localScale = new Vector3(leftSideData.width, _furniture.height, _furniture.depth);
-            leftSide.transform.position = new Vector3(-_furniture.width / 2 + leftSideData.width / 2, _furniture.height / 2, -_furniture.depth / 2);
+            leftSide.SetTansform(position, scale);
+            
             return leftSide;
         }
 
         private GameObject CreateRightSide(RightSide rightSideData)
         {
-            var rightSide = CreateCube();
+            var rightSide = FurnitureFunctions.CreateCube();
+            var position = new Vector3(_furniture.width / 2 - rightSideData.width / 2, _furniture.height / 2, -_furniture.depth / 2);
+            var scale = new Vector3(rightSideData.width, _furniture.height, _furniture.depth);
+            
             rightSide.name = "RightSide";
-            rightSide.transform.localScale = new Vector3(rightSideData.width, _furniture.height, _furniture.depth);
-            rightSide.transform.position = new Vector3(_furniture.width / 2 - rightSideData.width / 2, _furniture.height / 2, -_furniture.depth / 2);
+            rightSide.SetTansform(position, scale);
+            
             return rightSide;
         }
 
@@ -82,13 +87,15 @@ namespace Builders
 
             foreach (var shelfData in shelvesData)
             {
-                var shelf = CreateCube();
+                var shelf = FurnitureFunctions.CreateCube();
+                var position = new Vector3(0, shelfData.y, -_furniture.depth / 2);
+                var scale = new Vector3(_furniture.width, shelfData.height, _furniture.depth);
+                
                 shelf.name = "Shelf";
-                shelf.transform.localScale = new Vector3(_furniture.width, shelfData.height, _furniture.depth);
-                shelf.transform.position = new Vector3(0, shelfData.y, -_furniture.depth / 2);
+                shelf.SetTansform(position, scale);
+                
                 shelves.Add(shelf);
             }
-
             return shelves;
         }
 
@@ -102,17 +109,17 @@ namespace Builders
             var shelves = CreateShelves(_furniture.shelves);
 
             var furniture = new GameObject(Tags.Furniture);
-            backPanel.transform.SetParent(furniture.transform);
-            header.transform.SetParent(furniture.transform);
-            footer.transform.SetParent(furniture.transform);
-            leftSide.transform.SetParent(furniture.transform);
-            rightSide.transform.SetParent(furniture.transform);
-            
+            furniture.AddChild(backPanel);
+            furniture.AddChild(header);
+            furniture.AddChild(footer);
+            furniture.AddChild(leftSide);
+            furniture.AddChild(rightSide);
+
             foreach (var shelf in shelves)
-                shelf.transform.SetParent(furniture.transform);
+                furniture.AddChild(shelf);
 
             furniture.tag = Tags.Furniture;
-            SetTagForChildren(furniture, Tags.Fixture);
+            furniture.SetTagForChildren(Tags.Fixture);
             
             return furniture;
         }
