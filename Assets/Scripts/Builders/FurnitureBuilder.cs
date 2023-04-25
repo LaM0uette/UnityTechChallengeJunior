@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Constants;
 using Data;
 using UnityEngine;
 
@@ -75,7 +76,7 @@ namespace Builders
             return shelves;
         }
         
-        private void SetTagForChildren(GameObject parent, string tagName)
+        private static void SetTagForChildren(GameObject parent, string tagName)
         {
             foreach (Transform child in parent.transform)
             {
@@ -92,7 +93,7 @@ namespace Builders
             var rightSide = CreateRightSide(_furniture.rightSide);
             var shelves = CreateShelves(_furniture.shelves);
 
-            var furniture = new GameObject("Furniture");
+            var furniture = new GameObject(Tags.Furniture);
             backPanel.transform.SetParent(furniture.transform);
             header.transform.SetParent(furniture.transform);
             footer.transform.SetParent(furniture.transform);
@@ -102,8 +103,8 @@ namespace Builders
             foreach (var shelf in shelves)
                 shelf.transform.SetParent(furniture.transform);
 
-            furniture.tag = "Furniture";
-            SetTagForChildren(furniture, "Fixture");
+            furniture.tag = Tags.Furniture;
+            SetTagForChildren(furniture, Tags.Fixture);
             
             return furniture;
         }
