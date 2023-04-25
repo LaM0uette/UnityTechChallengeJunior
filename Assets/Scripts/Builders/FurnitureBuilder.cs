@@ -7,17 +7,33 @@ namespace Builders
 {
     public class FurnitureBuilder : MonoBehaviour, IFurnitureBuilder
     {
+        #region Statements
+
         private Furniture _furniture;
 
-        public IFurnitureBuilder SetData(Furniture furnitureData)
+        #endregion
+
+        #region Functions
+
+        public IFurnitureBuilder SetData(Furniture furniture)
         {
-            _furniture = furnitureData;
+            _furniture = furniture;
             return this;
+        }
+        
+        private static GameObject CreateCube() => GameObject.CreatePrimitive(PrimitiveType.Cube);
+        
+        private static void SetTagForChildren(GameObject parent, string tagName)
+        {
+            foreach (Transform child in parent.transform)
+            {
+                child.gameObject.tag = tagName;
+            }
         }
 
         private GameObject CreateBackPanel(BackPanel backPanelData)
         {
-            var backPanel = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            var backPanel = CreateCube();
             backPanel.name = "BackPanel";
             backPanel.transform.localScale = new Vector3(_furniture.width, _furniture.height, backPanelData.depth);
             backPanel.transform.position = new Vector3(0, _furniture.height / 2, 0);
@@ -26,7 +42,7 @@ namespace Builders
 
         private GameObject CreateHeader(Header headerData)
         {
-            var header = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            var header = CreateCube();
             header.name = "Header";
             header.transform.localScale = new Vector3(_furniture.width, headerData.height, _furniture.depth);
             header.transform.position = new Vector3(0, _furniture.height - headerData.height / 2, -_furniture.depth / 2);
@@ -35,7 +51,7 @@ namespace Builders
 
         private GameObject CreateFooter(Footer footerData)
         {
-            var footer = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            var footer = CreateCube();
             footer.name = "Footer";
             footer.transform.localScale = new Vector3(_furniture.width, footerData.height, _furniture.depth);
             footer.transform.position = new Vector3(0, footerData.height / 2, -_furniture.depth / 2);
@@ -44,7 +60,7 @@ namespace Builders
 
         private GameObject CreateLeftSide(LeftSide leftSideData)
         {
-            var leftSide = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            var leftSide = CreateCube();
             leftSide.name = "LeftSide";
             leftSide.transform.localScale = new Vector3(leftSideData.width, _furniture.height, _furniture.depth);
             leftSide.transform.position = new Vector3(-_furniture.width / 2 + leftSideData.width / 2, _furniture.height / 2, -_furniture.depth / 2);
@@ -53,7 +69,7 @@ namespace Builders
 
         private GameObject CreateRightSide(RightSide rightSideData)
         {
-            var rightSide = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            var rightSide = CreateCube();
             rightSide.name = "RightSide";
             rightSide.transform.localScale = new Vector3(rightSideData.width, _furniture.height, _furniture.depth);
             rightSide.transform.position = new Vector3(_furniture.width / 2 - rightSideData.width / 2, _furniture.height / 2, -_furniture.depth / 2);
@@ -66,7 +82,7 @@ namespace Builders
 
             foreach (var shelfData in shelvesData)
             {
-                var shelf = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                var shelf = CreateCube();
                 shelf.name = "Shelf";
                 shelf.transform.localScale = new Vector3(_furniture.width, shelfData.height, _furniture.depth);
                 shelf.transform.position = new Vector3(0, shelfData.y, -_furniture.depth / 2);
@@ -74,14 +90,6 @@ namespace Builders
             }
 
             return shelves;
-        }
-        
-        private static void SetTagForChildren(GameObject parent, string tagName)
-        {
-            foreach (Transform child in parent.transform)
-            {
-                child.gameObject.tag = tagName;
-            }
         }
 
         public GameObject Build()
@@ -108,5 +116,7 @@ namespace Builders
             
             return furniture;
         }
+
+        #endregion
     }
 }
