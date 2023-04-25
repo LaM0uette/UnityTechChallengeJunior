@@ -18,7 +18,7 @@ namespace Controllers
 
         #endregion
 
-        #region Functions
+        #region Events
 
         private void Start()
         {
