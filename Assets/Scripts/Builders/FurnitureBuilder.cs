@@ -74,6 +74,14 @@ namespace Builders
 
             return shelves;
         }
+        
+        private void SetTagForChildren(GameObject parent, string tagName)
+        {
+            foreach (Transform child in parent.transform)
+            {
+                child.gameObject.tag = tagName;
+            }
+        }
 
         public GameObject Build()
         {
@@ -94,6 +102,9 @@ namespace Builders
             foreach (var shelf in shelves)
                 shelf.transform.SetParent(furniture.transform);
 
+            furniture.tag = "Furniture";
+            SetTagForChildren(furniture, "Fixture");
+            
             return furniture;
         }
     }
