@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Constants;
 using UnityEngine;
 
@@ -12,8 +14,8 @@ namespace Camera
         [SerializeField] private Material fixtureMaterialSelected;
         
         private UnityEngine.Camera _mainCamera;
-        private GameObject _selectedFixture;
-        private Renderer _selectedFixtureRenderer;
+        private GameObject _selectedFurniture;
+        private Renderer[] _selectedFixturesRenderer;
 
         #endregion
 
@@ -39,26 +41,22 @@ namespace Camera
         private void OnLeftClick()
         {
             var hitObject = GetHitObject();
-            
             if (!hitObject.isGameObject) return;
+            
+            var furnitureParent = hitObject.gameObject.transform.parent.gameObject;
 
-            if (_selectedFixture != null && hitObject.gameObject.CompareTag(Tags.Fixture))
+            if (_selectedFurniture != null && furnitureParent.CompareTag(Tags.Furniture))
             {
-                SetFixtureMaterial(fixtureMaterial);
-                
-                _selectedFixture = hitObject.gameObject;
-                SetFixtureRenderer(hitObject.gameObject);
-                SetFixtureMaterial(fixtureMaterialSelected);
-            } else if (hitObject.gameObject.CompareTag(Tags.Fixture))
-            {
-                _selectedFixture = hitObject.gameObject;
-                SetFixtureRenderer(hitObject.gameObject);
-                SetFixtureMaterial(fixtureMaterialSelected);
-            } else if (_selectedFixture != null && hitObject.gameObject.CompareTag(Tags.Floor))
-            {
-                MoveFixtureToFloor(hitObject.hit);
-                SetFixtureMaterial(fixtureMaterial);
+                SetFixturesMaterial(fixtureMaterial);
                 ResetFixture();
+            }
+            
+            if (furnitureParent.CompareTag(Tags.Furniture))
+            {
+                SetFurniture(furnitureParent);
+            } else if (_selectedFurniture != null && hitObject.gameObject.CompareTag(Tags.Floor))
+            {
+                MoveFurniture(hitObject.hit);
             }
         }
 
@@ -70,25 +68,42 @@ namespace Camera
                 : (true, hit.transform.gameObject, hit);
         }
 
-        private void SetFixtureRenderer(GameObject fixture)
+        private void SetFurniture(GameObject parent)
         {
-            _selectedFixtureRenderer = _selectedFixture.GetComponent<Renderer>();
+            _selectedFurniture = parent;
+            SetFixturesRenderer();
+            SetFixturesMaterial(fixtureMaterialSelected);
         }
 
-        private void SetFixtureMaterial(Material material)
+        private void SetFixturesRenderer()
         {
-            _selectedFixtureRenderer.material = material;
+            _selectedFixturesRenderer = _selectedFurniture.GetComponentsInChildren<Renderer>();
         }
 
-        private void MoveFixtureToFloor(RaycastHit hit)
+        private void SetFixturesMaterial(Material material)
         {
-            _selectedFixture.transform.position = new Vector3(hit.point.x, _selectedFixtureRenderer.bounds.size.y / 2, hit.point.z);
+            foreach (var fixtureRenderer in _selectedFixturesRenderer)
+            {
+                fixtureRenderer.material = material;
+            }
+        }
+
+        private void MoveFurniture(RaycastHit hit)
+        {
+            MoveFurnitureOnFloor(hit);
+            SetFixturesMaterial(fixtureMaterial);
+            ResetFixture();
+        }
+
+        private void MoveFurnitureOnFloor(RaycastHit hit)
+        {
+            _selectedFurniture.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
         }
 
         private void ResetFixture()
         {
-            _selectedFixture = null;
-            _selectedFixtureRenderer = null;
+            _selectedFurniture = null;
+            _selectedFixturesRenderer = null;
         }
 
         #endregion
