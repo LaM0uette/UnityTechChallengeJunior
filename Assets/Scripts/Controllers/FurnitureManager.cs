@@ -7,35 +7,36 @@ namespace Controllers
 {
     public class FurnitureManager : MonoBehaviour
     {
-        [SerializeField] private Material _material;
-        [SerializeField] private TextAsset[] _furnitureJsonFiles;
-        private const float _spacingBetweenFurnitures = 100f;
+        #region Statements
+        
+        [Header("Materials")]
+        [SerializeField] private Material fixtureMaterial;
+        
+        [Header("Furnitures")]
+        [SerializeField] private TextAsset[] furnitureJsonFiles;
+        [SerializeField] private float spacingBetweenFurnitures = 100f;
+
+        #endregion
+
+        #region Functions
 
         private void Start()
         {
             float xOffset = 0;
 
-            foreach (var jsonFile in _furnitureJsonFiles)
+            foreach (var jsonFile in furnitureJsonFiles)
             {
                 var furnitureData = JsonParser.Parse<Furniture>(jsonFile.text);
                 var builder = gameObject.AddComponent<FurnitureBuilder>().SetData(furnitureData);
                 var furniture = builder.Build();
                 
-                ChangeFurnitureMaterial(furniture, _material);
-
+                furniture.ChangeFixturesMaterial(fixtureMaterial);
                 furniture.transform.position = new Vector3(furnitureData.width / 2 + xOffset, 0, 0);
-                xOffset += furnitureData.width + _spacingBetweenFurnitures;
+                
+                xOffset += furnitureData.width + spacingBetweenFurnitures;
             }
         }
-        
-        private static void ChangeFurnitureMaterial(GameObject furniture, Material material)
-        {
-            var renderers = furniture.GetComponentsInChildren<Renderer>();
 
-            foreach (var furnitureRenderer in renderers)
-            {
-                furnitureRenderer.material = material;
-            }
-        }
+        #endregion
     }
 }

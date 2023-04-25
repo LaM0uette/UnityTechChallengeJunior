@@ -12,16 +12,23 @@ namespace Builders
             gameObject.transform.localScale = scale;
         }
 
-        public static void AddChild(this GameObject parent, GameObject child)
-        {
-            child.transform.SetParent(parent.transform);
-        }
+        public static void AddChild(this GameObject parent, GameObject child) => child.transform.SetParent(parent.transform);
         
         public static void SetTagForChildren(this GameObject parent, string tagName)
         {
             foreach (Transform child in parent.transform)
             {
                 child.gameObject.tag = tagName;
+            }
+        }
+        
+        public static void ChangeFixturesMaterial(this GameObject furniture, Material material)
+        {
+            var renderers = furniture.GetComponentsInChildren<Renderer>();
+
+            foreach (var furnitureRenderer in renderers)
+            {
+                furnitureRenderer.material = material;
             }
         }
     }

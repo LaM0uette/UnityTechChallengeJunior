@@ -453,11 +453,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645509d894f312e4b83d572e02ed3c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _furnitureJsonFiles:
+  fixtureMaterial: {fileID: 2100000, guid: c2ad2f68f088ee8458aa1bc83dce8d96, type: 2}
+  furnitureJsonFiles:
   - {fileID: 4900000, guid: 5d64c0e89294418f8fcd409030103f16, type: 3}
   - {fileID: 4900000, guid: 0d9cb03fcfee4d95b7715d8aab58a34a, type: 3}
   - {fileID: 4900000, guid: 2fa6c2376d8b4773aa29fa381cf20f79, type: 3}
   - {fileID: 4900000, guid: 18f9aaca18244f3c8d2de23eac157220, type: 3}
+  spacingBetweenFurnitures: 100
 --- !u!1 &2005719740
 GameObject:
   m_ObjectHideFlags: 0
