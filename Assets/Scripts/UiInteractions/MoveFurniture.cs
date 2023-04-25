@@ -1,7 +1,7 @@
 using Constants;
 using UnityEngine;
 
-namespace Camera
+namespace UiInteractions
 {
     public class MoveFurniture : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace Camera
         [SerializeField] private Material fixtureMaterial;
         [SerializeField] private Material fixtureMaterialSelected;
         
-        private UnityEngine.Camera _mainCamera;
+        private Camera _mainCamera;
         private GameObject _selectedFurniture;
         private Renderer[] _selectedFixturesRenderer;
 
