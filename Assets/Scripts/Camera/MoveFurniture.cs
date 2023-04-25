@@ -1,11 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
 using Constants;
 using UnityEngine;
 
 namespace Camera
 {
-    public class MoveFixture : MonoBehaviour
+    public class MoveFurniture : MonoBehaviour
     {
         #region Statements
 
@@ -56,7 +54,7 @@ namespace Camera
                 SetFurniture(furnitureParent);
             } else if (_selectedFurniture != null && hitObject.gameObject.CompareTag(Tags.Floor))
             {
-                MoveFurniture(hitObject.hit);
+                Move(hitObject.hit);
             }
         }
 
@@ -88,14 +86,14 @@ namespace Camera
             }
         }
 
-        private void MoveFurniture(RaycastHit hit)
+        private void Move(RaycastHit hit)
         {
-            MoveFurnitureOnFloor(hit);
+            MoveOnFloor(hit);
             SetFixturesMaterial(fixtureMaterial);
             ResetFixture();
         }
 
-        private void MoveFurnitureOnFloor(RaycastHit hit)
+        private void MoveOnFloor(RaycastHit hit)
         {
             _selectedFurniture.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
         }
