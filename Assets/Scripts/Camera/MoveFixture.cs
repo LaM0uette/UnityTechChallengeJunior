@@ -30,7 +30,7 @@ namespace Camera
                         selectedFixture = hitObject;
                         selectedFixture.GetComponent<Renderer>().material = _materialSelected;
                     } else if (selectedFixture != null && hitObject.CompareTag(Tags.Floor)) {
-                        selectedFixture.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+                        selectedFixture.transform.position = new Vector3(hit.point.x, selectedFixture.GetComponent<Renderer>().bounds.size.y / 2, hit.point.z);
                         selectedFixture.GetComponent<Renderer>().material = _material;
                     }
                 }
