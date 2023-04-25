@@ -29,7 +29,8 @@ namespace Builders
             
             backPanel.name = "BackPanel";
             backPanel.SetTansform(position, scale);
-            
+            backPanel.AddBoxCollider();
+
             return backPanel;
         }
 
@@ -41,6 +42,7 @@ namespace Builders
             
             header.name = "Header";
             header.SetTansform(position, scale);
+            header.AddBoxCollider();
             
             return header;
         }
@@ -53,6 +55,7 @@ namespace Builders
             
             footer.name = "Footer";
             footer.SetTansform(position, scale);
+            footer.AddBoxCollider();
             
             return footer;
         }
@@ -65,6 +68,7 @@ namespace Builders
             
             leftSide.name = "LeftSide";
             leftSide.SetTansform(position, scale);
+            leftSide.AddBoxCollider();
             
             return leftSide;
         }
@@ -77,6 +81,7 @@ namespace Builders
             
             rightSide.name = "RightSide";
             rightSide.SetTansform(position, scale);
+            rightSide.AddBoxCollider();
             
             return rightSide;
         }
@@ -93,6 +98,7 @@ namespace Builders
                 
                 shelf.name = "Shelf";
                 shelf.SetTansform(position, scale);
+                shelf.AddBoxCollider();
                 
                 shelves.Add(shelf);
             }
