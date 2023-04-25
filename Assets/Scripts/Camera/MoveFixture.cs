@@ -38,25 +38,40 @@ namespace Camera
 
         private void OnLeftClick()
         {
-            var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (!Physics.Raycast(ray, out var hit, Mathf.Infinity)) return;
+            var hitObject = GetHitObject();
             
-            var hitObject = hit.transform.gameObject;
+            if (!hitObject.isGameObject) return;
 
-            if (hitObject.CompareTag(Tags.Fixture))
+            if (_selectedFixture != null && hitObject.gameObject.CompareTag(Tags.Fixture))
             {
-                SetSelectedFixture(hitObject);
-                SetFixtureMaterial(fixtureMaterialSelected);
-            } else if (_selectedFixture != null && hitObject.CompareTag(Tags.Floor))
-            {
-                MoveFixtureToFloor(hit);
                 SetFixtureMaterial(fixtureMaterial);
+                
+                _selectedFixture = hitObject.gameObject;
+                SetFixtureRenderer(hitObject.gameObject);
+                SetFixtureMaterial(fixtureMaterialSelected);
+            } else if (hitObject.gameObject.CompareTag(Tags.Fixture))
+            {
+                _selectedFixture = hitObject.gameObject;
+                SetFixtureRenderer(hitObject.gameObject);
+                SetFixtureMaterial(fixtureMaterialSelected);
+            } else if (_selectedFixture != null && hitObject.gameObject.CompareTag(Tags.Floor))
+            {
+                MoveFixtureToFloor(hitObject.hit);
+                SetFixtureMaterial(fixtureMaterial);
+                ResetFixture();
             }
         }
 
-        private void SetSelectedFixture(GameObject fixture)
+        private (bool isGameObject, GameObject gameObject, RaycastHit hit) GetHitObject()
         {
-            _selectedFixture = fixture;
+            var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            return !Physics.Raycast(ray, out var hit, Mathf.Infinity) 
+                ? (false, null, hit) 
+                : (true, hit.transform.gameObject, hit);
+        }
+
+        private void SetFixtureRenderer(GameObject fixture)
+        {
             _selectedFixtureRenderer = _selectedFixture.GetComponent<Renderer>();
         }
 
@@ -68,6 +83,12 @@ namespace Camera
         private void MoveFixtureToFloor(RaycastHit hit)
         {
             _selectedFixture.transform.position = new Vector3(hit.point.x, _selectedFixtureRenderer.bounds.size.y / 2, hit.point.z);
+        }
+
+        private void ResetFixture()
+        {
+            _selectedFixture = null;
+            _selectedFixtureRenderer = null;
         }
 
         #endregion
