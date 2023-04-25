@@ -253,7 +253,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.5308384, g: 0.70863384, b: 0.745283, a: 0}
+  m_BackGroundColor: {r: 0.1764706, g: 0.18823531, b: 0.20392159, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -294,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
-  m_LocalPosition: {x: 2784.0002, y: 2375, z: -3252}
+  m_LocalPosition: {x: 2995, y: 2717, z: -3164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -312,8 +312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b667a3da9c5ae4faf8ef9568c240f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _material: {fileID: 2100000, guid: c2ad2f68f088ee8458aa1bc83dce8d96, type: 2}
-  _materialSelected: {fileID: 2100000, guid: 8cca4ed0e9729bd40945d87ddd5e59ee, type: 2}
+  fixtureMaterial: {fileID: 2100000, guid: c2ad2f68f088ee8458aa1bc83dce8d96, type: 2}
+  fixtureMaterialSelected: {fileID: 2100000, guid: 8cca4ed0e9729bd40945d87ddd5e59ee, type: 2}
 --- !u!1 &1861778621
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861778621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2673.4636, y: 2953.752, z: -3208.7812}
+  m_LocalPosition: {x: 2673.4636, y: 2953.752, z: -3767}
   m_LocalScale: {x: 10000, y: 1, z: 10000}
   m_Children: []
   m_Father: {fileID: 2005719741}
