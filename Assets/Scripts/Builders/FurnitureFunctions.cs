@@ -12,7 +12,7 @@ namespace Builders
             gameObject.transform.localScale = scale;
         }
 
-        public static void AddBoxCollider(this GameObject gameObject) => gameObject.AddComponent<BoxCollider>();
+        public static void AddMeshCollider(this GameObject gameObject) => gameObject.AddComponent<MeshCollider>();
 
         public static void AddChild(this GameObject parent, GameObject child) => child.transform.SetParent(parent.transform);
         

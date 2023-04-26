@@ -1,0 +1,22 @@
+﻿{
+  "width": 1200,
+  "height": 2000,
+  "depth": 410,
+  "backPanel": { "depth": 10 },
+  "header": { "height": 300 },
+  "footer": { "height": 200 },
+  "leftSide": { "width": 25 },
+  "rightSide": { "width": 25 },
+  "shelves": [
+    { "height": 20, "y": 350 },
+    { "height": 20, "y": 350 },
+    { "height": 20, "y": 500 },
+    { "height": 20, "y": 650 },
+    { "height": 20, "y": 800 },
+    { "height": 20, "y": 950 },
+    { "height": 20, "y": 1100 },
+    { "height": 20, "y": 1250 },
+    { "height": 20, "y": 1400 },
+    { "height": 20, "y": 1550 }
+  ]
+}
